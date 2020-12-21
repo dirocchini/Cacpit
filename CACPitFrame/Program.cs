@@ -22,10 +22,10 @@ namespace CACPitFrame
                 List<Protocol> protocols = new List<Protocol>();
 
                 Console.WriteLine("");
-                Console.Write(" DESEJA UTILIZAR O ARQUIVO DE PROCESSOS? (s ou n): ");
-                var useFile = Console.ReadLine();
+                Console.Write(" DESEJA UTILIZAR O ARQUIVO DE PROCESSOS? aperte enter para sim ou digite n para não: ");
+                var useFile = Console.ReadLine().Trim();
 
-                if (useFile.ToLower().Trim() == "s")
+                if (string.IsNullOrEmpty(useFile))
                 {
                     Console.WriteLine("");
                     Console.WriteLine("  -- consultando");
