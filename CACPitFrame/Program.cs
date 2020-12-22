@@ -15,20 +15,21 @@ namespace CACPitFrame
         {
             try
             {
-                Console.WriteLine("CACpit v0.2.0");
+                Console.WriteLine(" CACpit v0.2.1");
 
                 var action = "i";
 
                 List<Protocol> protocols = new List<Protocol>();
 
                 Console.WriteLine("");
-                Console.Write(" DESEJA UTILIZAR O ARQUIVO DE PROCESSOS? aperte enter para sim ou digite n para não: ");
+                Console.WriteLine("   DESEJA UTILIZAR O ARQUIVO DE PROCESSOS?");
+                Console.Write("     aperte enter para sim ou digite n para inserir manualmente CPF e Protocolo: "); 
                 var useFile = Console.ReadLine().Trim();
 
                 if (string.IsNullOrEmpty(useFile))
                 {
                     Console.WriteLine("");
-                    Console.WriteLine("  -- consultando");
+                    Console.WriteLine("   -- consultando");
 
                     ReadAndProcessAll();
                     return;
@@ -37,13 +38,13 @@ namespace CACPitFrame
                 while (action.ToLower() == "i")
                 {
                     Console.WriteLine("");
-                    Console.Write(" INFORME O CPF: ");
+                    Console.Write("  INFORME O CPF: ");
                     var document = Console.ReadLine();
 
-                    Console.Write(" INFORME O PROTOCOLO: ");
+                    Console.Write("  INFORME O PROTOCOLO: ");
                     var protocol = Console.ReadLine();
 
-                    Console.Write(" PARA INFORMAR OUTRO PROTOCOLO, DIGITE i, CASO CONTRÁRIO APERTE ENTER PARA CONSULTAR: ");
+                    Console.Write("  PARA INFORMAR OUTRO PROTOCOLO, DIGITE i, CASO CONTRÁRIO APERTE ENTER PARA CONSULTAR: ");
                     action = Console.ReadLine();
 
                     protocols.Add(new Protocol() { Document = document, ProtocolNbr = protocol });
@@ -72,7 +73,8 @@ namespace CACPitFrame
             {
                 Console.WriteLine("");
                 Console.WriteLine("");
-                Console.WriteLine("PRESSIONE QUALQUER TECLA PARA FINALIZAR");
+                Console.WriteLine(" PROCESSO FINALIZADO");
+                Console.WriteLine(" PRESSIONE QUALQUER TECLA PARA FECHAR ESTA JANELA");
 
                 Console.ReadKey();
             }
@@ -97,11 +99,11 @@ namespace CACPitFrame
                     }
                 }
                 else
-                    Console.Write(" O ARQUIVO NÃO CONTÉM PROCESSOS PARA SEREM CONSULTADOS");
+                    Console.Write("  O ARQUIVO NÃO CONTÉM PROCESSOS PARA SEREM CONSULTADOS");
 
             }
             else
-                Console.Write($" O ARQUIVO {file} NÃO FOI ENCONTRADO");
+                Console.Write($"  O ARQUIVO {file} NÃO FOI ENCONTRADO");
 
         }
 
@@ -121,8 +123,8 @@ namespace CACPitFrame
 
             if (responseString.ToLower().Contains("processo não localizado") || responseString.ToLower().Contains("<strong><span class='oi oi-warning'></span> processo "))
             {
-                Console.WriteLine("  PROTOCOLO:    " + protocolNbr);
-                Console.WriteLine("  STATUS:       " + "NÃO LOCALIZADO");
+                Console.WriteLine("   PROTOCOLO:    " + protocolNbr);
+                Console.WriteLine("   STATUS:       " + "NÃO LOCALIZADO");
 
                 return;
             }
@@ -135,11 +137,11 @@ namespace CACPitFrame
             var date = doc.DocumentNode.SelectSingleNode("(//table[contains(@class,'table')]//tbody//tr[1]//td[2])").InnerText;
 
 
-            Console.WriteLine("  PROTOCOLO:    " + protocolNbr);
-            Console.WriteLine("  REQUERENTE:   " + requester);
-            Console.WriteLine("  DOCUMENTO:    " + requesterDoc);
-            Console.WriteLine("  DATA DO PROT: " + date);
-            Console.WriteLine("  STATUS:       " + status);
+            Console.WriteLine("   PROTOCOLO:    " + protocolNbr);
+            Console.WriteLine("   REQUERENTE:   " + requester);
+            Console.WriteLine("   DOCUMENTO:    " + requesterDoc);
+            Console.WriteLine("   DATA DO PROT: " + date);
+            Console.WriteLine("   STATUS:       " + status);
         }
     }
 }
