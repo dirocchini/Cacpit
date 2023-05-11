@@ -109,11 +109,13 @@ namespace CACPitFrame
 
         private static void GetProcessInfo(WebClient client, string document, string protocolNbr)
         {
-            string url = "http://protocolosfpc.2rm.eb.mil.br/consulta_processo.php";
+            string url = "https://protocolosfpc.2rm.eb.mil.br/consulta_processo.php";
 
             var values = new NameValueCollection();
             values["txt_cpf_cnpj"] = document;
             values["txt_protocolo"] = protocolNbr;
+
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
             var response = client.UploadValues(url, values);
 
